@@ -40,7 +40,6 @@ function init({initAreas, areaConfig}) {
     }
     if (initAreas) {
         for (let i = 0; i < initAreas; i++) {
-            console.log("adding", i)
             initState.areas.push(areaConfig);
             initState.error.push([])
         }
@@ -72,7 +71,6 @@ const AreaForm = props => {
     }
 
     const changeValue = (value, row, param, rules) => {
-        console.log(state.error[row])
         if (!value) return;
         dispatch({
             type: "change",
@@ -83,21 +81,27 @@ const AreaForm = props => {
         })
     }
 
-    return state.areas.map( (area, i) => {
-        //only accepts primitive values from keys;
-        const params = Object.entries(area).filter( p => typeof(p[1]) != "object");
+    const generateFields = () => state.areas.map( (area, i) => {
+        
+        const params = Object.entries(area).filter( ([fname, fval]) => (
+            typeof(fval) === "number"
+        ))
         return (
             <div key={i}>
                 <button onClick={() => deleteRow(i)}
                 > - </button>
                 {
-                    params.map( (p,ind) => { 
+                    params.map( ([pname, pvalue],ind) => { 
                         return(
                         <React.Fragment key={ind}>
-                            <label>{p[0]+': '}</label>
-                            <input type="number"
-                                onChange={e => changeValue(e.target.value, i, p[0], area.rules)} 
-                                value={p[1]}/>
+                            <label>{pname+': '}</label>
+                            <input 
+                                type="number"
+                                onChange={e => {
+                                    changeValue(e.target.value, i, pname, area.rules)
+                                }} 
+                                value={pvalue}
+                            />
                         </React.Fragment>
                         )
                     })
@@ -110,6 +114,21 @@ const AreaForm = props => {
             </div>
         )
     })
+
+    const calculateTotal = () => {
+        let total = 0;
+        state.areas.forEach( area => {
+            total += area.totalArea(area);
+        })
+        return total;
+    }
+
+    return (
+        <>
+        {generateFields()}
+        <p>Total solid area: {calculateTotal()}</p>
+        </>
+    )
 }
         
 export default AreaForm
