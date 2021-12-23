@@ -1,5 +1,5 @@
 {
-  "name": "react-boilerplate",
+  "name": "quanta-tinta",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "https://github.com/cooksoundscapes/react-boilerplate.git",
@@ -7,13 +7,13 @@
   "license": "MIT",
   "dependencies": {
     "@emotion/react": "^11.7.0",
+    "immer": "^9.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
   "scripts": {
     "start": "webpack serve --config webpack.dev.js --open",
     "build": "webpack --config webpack.prod.js"
-    
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
