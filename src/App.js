@@ -2,6 +2,8 @@
 import { useState } from "react/cjs/react.development";
 import AreaForm from "./AreaForm";
 import PaintCalculator from "./PaintCalculator";
+import ModalBox from "./ModalBox";
+import './baseline.css';
 
 const parede = {
     largura: 3,
@@ -21,7 +23,7 @@ const parede = {
     rules: {
         porta: [0.8, 1.9],
         janela: [2.0, 1.2],
-        metragemMinima: (parede) => {
+        metragemMaxima: (parede) => {
             let min = 1;
             let maxAlt = 15/parede.largura;
             let maxLarg = 15/parede.altura;
@@ -33,12 +35,12 @@ const parede = {
             if (parede.altura > maxAlt || parede.largura > maxLarg) {
                 return [["largura", "altura"], "Área máxima de 15m² excedida"];
             }
-            return null;
+            return  ;
         },
         maximaAreaVazada: (parede) => {
             const areaSolida = parede.altura * parede.largura;
             if (areaSolida/2 < parede.areaVazada(parede)) {
-                return [["portas", "janelas"], "Atenção: área vazada máxima excedida."]; 
+                return [["portas", "janelas"], "Área vazada máxima excedida."]; 
             }
             return null;
         }
@@ -51,10 +53,12 @@ const App = () => {
     const [total, setTotal] = useState(0);
 
     return (
-        <div>
+        <ModalBox>
+            <div>
             <AreaForm initAreas={4} areaConfig={parede} getTotal={setTotal} />
+            </div>
             <PaintCalculator canSizes={latasDeTinta} area={total} />
-        </div>
+        </ModalBox>
     )
 }
 

@@ -1,19 +1,24 @@
 
-import React, { useReducer } from "react";
+import React, { useEffect, useReducer } from "react";
 import immer from 'immer';
+import NumberInput from "./NumberInput";
+import RoundButton from './RoundButton'
+import FlexContainer from "./FlexContainer";
 
 const reducerActions = {
     add: (state, action) => {
         state.areas.push(action.areaModel);
+        state.error.push([]);
     },
     delete: (state, action) => {
         state.areas.splice(action.index, 1);
+        state.error.splice(action.index, 1)
     },
     change: (state, action) => {
-        state.areas[action.row][action.param] = Math.max(0, parseFloat(action.value));
-
+        state.areas[action.row][action.param] = Math.max(0, parseFloat(action.value).toFixed(2));
         const errState = state.error[action.row];
-        const tests = Object.entries(action.rules).filter(r => typeof(r[1]) == 'function');
+        const tests = Object.entries(action.rules)
+            .filter(r => typeof(r[1]) == 'function');
         //test area against all conditions on descriptor.rules;
         tests.forEach(([fname, func]) => {
             let err, errIndex;
@@ -81,54 +86,57 @@ const AreaForm = props => {
         })
     }
 
-    const generateFields = () => state.areas.map( (area, i) => {
-        
+    useEffect( () => {
+        let errState = state.error.some( err => err.length > 0);
+        if (errState) {
+            props.getTotal(null);
+        } else {
+            let total = 0;
+            state.areas.forEach( area => {
+                total += area.totalArea(area);
+            })
+            props.getTotal(total);
+        }
+    }, [state])
+
+    return state.areas.map( (area, i) => {  
         const params = Object.entries(area).filter( ([fname, fval]) => (
             typeof(fval) === "number"
         ))
         return (
-            <div key={i}>
-                <button onClick={() => deleteRow(i)}
-                > - </button>
+            <FlexContainer key={i}>
+                {state.areas.length < 2 ? null :
+                <RoundButton onClick={() => deleteRow(i)}
+                > - </RoundButton>
+                }
                 {
                     params.map( ([pname, pvalue],ind) => { 
                         return(
-                        <React.Fragment key={ind}>
-                            <label>{pname+': '}</label>
-                            <input 
-                                type="number"
+                            <NumberInput
+                                key={ind}
+                                label={pname+': '}
                                 onChange={e => {
                                     changeValue(e.target.value, i, pname, area.rules)
                                 }} 
                                 value={pvalue}
+                                errorMsg={
+                                    //check if the error targets matches field name;
+                                    state.error[i]
+                                    .filter(errObj => errObj.error[0].includes(pname))
+                                    .map( err => err.error[1])
+                                }
                             />
-                        </React.Fragment>
                         )
                     })
                 }
                 {i == state.areas.length -1 ? 
-                    <button onClick={addRow}
-                    > + </button> 
+                    <RoundButton onClick={addRow}
+                    > + </RoundButton> 
                     : null
                 }
-            </div>
+            </FlexContainer>
         )
     })
-
-    const calculateTotal = () => {
-        let total = 0;
-        state.areas.forEach( area => {
-            total += area.totalArea(area);
-        })
-        return total;
-    }
-
-    return (
-        <>
-        {generateFields()}
-        <p>Total solid area: {calculateTotal()}</p>
-        </>
-    )
 }
         
-export default AreaForm
+export default AreaForm;

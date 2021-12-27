@@ -21,17 +21,22 @@ module.exports = {
             }
         },
         {
-            test: /\.(png|jpe?g|gif|wav)$/i,
-            use: [
-              {
-                loader: 'file-loader',
-              }
-            ]
-          },
-        {
-            test: /\.html$/i,
-            loader: "html-loader",
+          test: /\.(png|jpe?g|gif|wav)$/i,
+          use: [
+            {
+              loader: 'file-loader',
+            }
+          ]
         },
+        {
+          test: /\.css$/i,
+          use: ["style-loader", "css-loader"]
+        },
+        {
+          test: /\.html$/i,
+          loader: "html-loader",
+        },
+        
       ],
     },
     plugins: [new HtmlWebpackPlugin({
