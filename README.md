@@ -8,7 +8,7 @@
 
 Em um terminal, execute os seguintes comandos: 
 ```
-git clone 
+git clone https://github.com/cooksoundscapes/paint-calculator
 cd quanta-tinta
 yarn install
 yarn start
