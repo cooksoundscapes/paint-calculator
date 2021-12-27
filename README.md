@@ -33,6 +33,8 @@ Este App foi desenvolvido em React.js e é composto basicamente por 2 componente
 
 Este repositório contém um exemplo de uso do componente AreaForm com um objeto-modelo "Parede", que possui áreas sólidas e vazadas. Um outro exemplo de objeto-modelo seria:
 ```
+import { render } from 'react-dom';
+
 const cubo = {
   altura: 0,
   largura: 0,
@@ -48,6 +50,8 @@ const cubo = {
     }
   }
 }
+
+render(<AreaForm areaConfig={cubo} />, document.getElementById('root'));
 ```
 
 
