@@ -13,12 +13,12 @@ export default function PopOver(props) {
     return (
         <div css={css`
             color: white;
-            background-color: red;
+            background-color: ${props.type == 'error' ? 'red' : 'darkgrey'};
             border-radius: 4px;
             font-size: 14px;
             font-weight: 400;
             position: absolute;
-            bottom: -3em;
+            ${props.position == 'bottom' ? 'bottom: -3em;' : 'top: -3em;' }
             flex-shrink: 0;
             z-index: 10;
             padding: 4px;

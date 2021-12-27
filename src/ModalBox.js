@@ -11,6 +11,7 @@ export default function ModalBox(props) {
             margin: 10vh auto;
             padding: 16px;
             border-radius: 8px;
+            background-color: white
         `}>
             {props.children}
         </div>

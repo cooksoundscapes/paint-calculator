@@ -38,14 +38,16 @@ export default function NumberInput(props) {
             <input 
                 type='number' 
                 onChange={props.onChange}
-                value={props.onChange ? props.value : null}//preventing uncontrollable component
+                value={props.onChange ? props.value.toFixed(2) : null}//preventing uncontrollable component
             />
             <hr/>
-            {props.errorMsg.length > 0 ? <PopOver type='error'>
+            {props.errorMsg.length > 0 ? 
+                <PopOver type='error' position='bottom'>
                 {props.errorMsg.map( (msg, id) => (
                     <p key={id}>{msg}</p>) 
                 )}
-            </PopOver> : null}
+                </PopOver> 
+            : null}
         </label>
     )
 }

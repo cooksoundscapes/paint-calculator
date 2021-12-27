@@ -15,7 +15,7 @@ const reducerActions = {
         state.error.splice(action.index, 1)
     },
     change: (state, action) => {
-        state.areas[action.row][action.param] = Math.max(0, parseFloat(action.value).toFixed(2));
+        state.areas[action.row][action.param] = Math.max(0, parseFloat(action.value));
         const errState = state.error[action.row];
         const tests = Object.entries(action.rules)
             .filter(r => typeof(r[1]) == 'function');
