@@ -5,6 +5,7 @@
 - O programa calcula quanta tinta é necessária, e sugere tamanhos de latas de tinta.
 
 ![animated gif](paint_calculator.gif)
+![animated gif](responsive_paint_calc.gif)
 
 ### Instalação
 
