@@ -8,6 +8,9 @@ export default function NumberInput(props) {
             flex-direction: column;
             flex-shrink: 1;
             margin: 22px 8px;
+            @media (max-width: 380px) {
+                margin: 22px 2px;
+            }
             font-weight: bold;
             font-size: 16px;
             position: relative;

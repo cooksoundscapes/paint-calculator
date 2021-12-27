@@ -1,6 +1,7 @@
 import {css} from "@emotion/react"
 
 export default function RoundButton(props) {
+    const defaultSize = 36;
     return( 
     <button
         onClick={props.onClick}
@@ -12,8 +13,13 @@ export default function RoundButton(props) {
             color: white;
             font-weight: bold;
             font-size: 18px;
-            width: ${props.size || 36}px;
-            height: ${props.size || 36}px;
+            width: ${props.size || defaultSize}px;
+            height: ${props.size || defaultSize}px;
+            @media (max-width: 380px) {
+                width: 20px;
+                height: 20px;
+                font-size: 14px
+            }
             &:hover {
                 opacity: 0.7
             }
