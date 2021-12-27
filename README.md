@@ -4,6 +4,8 @@
 - Adicione portas e janelas para cada parede;
 - O programa calcula quanta tinta é necessária, e sugere tamanhos de latas de tinta.
 
+![animated gif](paint_calculator.gif)
+
 ### Instalação
 
 Em um terminal, execute os seguintes comandos: 
