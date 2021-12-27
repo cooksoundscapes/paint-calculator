@@ -13,7 +13,7 @@ Em um terminal, execute os seguintes comandos:
 git clone https://github.com/cooksoundscapes/paint-calculator
 ```
 ```
-cd quanta-tinta
+cd paint-calculator
 ```
 ```
 yarn install
