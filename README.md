@@ -9,7 +9,7 @@
 Em um terminal, execute os seguintes comandos: 
 ```
 git clone 
-cd quanta-tinta
+cd paint-calculator
 yarn install
 yarn start
 ```

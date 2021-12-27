@@ -8,7 +8,7 @@ export default function ModalBox(props) {
             flex-direction: column;
             align-items: center;
             width: 85vw;
-            margin: 10vh auto;
+            margin: 4vh auto;
             padding: 16px;
             border-radius: 8px;
             background-color: white

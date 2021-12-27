@@ -18,7 +18,7 @@ export default function PopOver(props) {
             font-size: 14px;
             font-weight: 400;
             position: absolute;
-            ${props.position == 'bottom' ? 'bottom: -3em;' : 'top: -3em;' }
+            ${props.position == 'bottom' ? 'top: 3.75em;' : 'top: -3em;' }
             flex-shrink: 0;
             z-index: 10;
             padding: 4px;

@@ -64,7 +64,8 @@ const PaintCalculator = ({canSizes, area}) => {
                 { litres > 0 ? `faltam ${litres.toFixed(2)}L.` :
                 `sobraram ${-1*litres.toFixed(2)}L.`
                 }
-            </p>    
+            </p>   
+            <p>* Uma porta possui 0,80m x 1,90m, enquanto uma janela 2,00m x 1,20m.</p> 
         </div>
     )
 }

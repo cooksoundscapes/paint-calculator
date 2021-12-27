@@ -7,12 +7,15 @@ export default function NumberInput(props) {
             display: inline-flex;
             flex-direction: column;
             flex-shrink: 1;
-            margin: 8px;
+            margin: 22px 8px;
             font-weight: bold;
             font-size: 16px;
             position: relative;
             & input {
                 width: 6em;
+                @media (max-width: 800px) {
+                    width: 2em;
+                }
                 font-size: 18px;
                 font-weight: regular;
                 padding: 4px 8px;
